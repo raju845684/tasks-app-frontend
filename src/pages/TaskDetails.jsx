@@ -187,7 +187,7 @@ const TaskDetails = () => {
                   Attachment
                 </h3>
                 <img
-                  src={`http://127.0.0.1:5000/${todo.image}`}
+                  src={todo.image}
                   alt={todo.title}
                   className="rounded-xl max-h-80 object-contain"
                 />

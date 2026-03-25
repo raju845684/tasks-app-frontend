@@ -1,11 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import {
-  FaThLarge,
-  FaExclamationCircle,
-  FaTasks,
-  FaListUl,
-  FaCog,
-  FaQuestionCircle,
-  FaSignOutAlt,
+  FaThLarge, FaExclamationCircle, FaTasks,
+  FaListUl, FaCog, FaQuestionCircle, FaSignOutAlt,
 } from "react-icons/fa";
 
 const navItems = [
@@ -18,6 +15,18 @@ const navItems = [
 ];
 
 const Sidebar = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  // Generate initials avatar if no photo
+  const avatarSrc = user?.avatar ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || "U")}&background=f87171&color=fff&size=64`;
+
   return (
     <div className="w-56 min-h-screen bg-red-500 text-white flex flex-col flex-shrink-0">
       {/* Logo */}
@@ -30,18 +39,20 @@ const Sidebar = () => {
 
       {/* User Profile */}
       <div className="flex flex-col items-center py-6 px-4 border-b border-red-400">
-        <div className="w-16 h-16 rounded-full bg-white overflow-hidden mb-3 border-2 border-white shadow">
-          <img
-            src="https://ui-avatars.com/api/?name=Sundar+Gurung&background=f87171&color=fff&size=64"
-            alt="avatar"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <p className="font-semibold text-sm">Sundar Gurung</p>
-        <p className="text-xs text-red-200 mt-0.5">sundargurung360@gmail.com</p>
+        <img
+          src={avatarSrc}
+          alt={user?.name}
+          className="w-14 h-14 rounded-full border-2 border-white shadow object-cover mb-2"
+        />
+        <p className="font-semibold text-sm text-center leading-tight">
+          {user?.name || "User"}
+        </p>
+        <p className="text-xs text-red-200 mt-0.5 text-center truncate w-full px-2">
+          {user?.email}
+        </p>
       </div>
 
-      {/* Nav Items */}
+      {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-1">
         {navItems.map((item) => (
           <button
@@ -60,7 +71,10 @@ const Sidebar = () => {
 
       {/* Logout */}
       <div className="px-3 pb-6">
-        <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-white hover:bg-red-400 transition-all">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-white hover:bg-red-400 transition-all"
+        >
           <FaSignOutAlt className="text-base" />
           Logout
         </button>
