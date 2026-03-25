@@ -78,7 +78,7 @@ const TaskCard = ({ todo }) => {
       {/* Image */}
       {todo.image && (
         <img
-          src={`http://127.0.0.1:5000/${todo.image}`}
+          src={todo.image}
           alt={todo.title}
           className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
         />

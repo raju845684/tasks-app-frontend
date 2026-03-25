@@ -205,7 +205,7 @@ const CompletedCard = ({ todo }) => {
       </div>
       {todo.image && (
         <img
-          src={`http://127.0.0.1:5000/${todo.image}`}
+          src={todo.image}
           alt={todo.title}
           className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
         />
