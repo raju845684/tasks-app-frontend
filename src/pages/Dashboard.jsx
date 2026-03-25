@@ -8,13 +8,6 @@ import { getTodos, getStats } from "../services/todoApi";
 import { useAuth } from "../context/AuthContext";
 import { FaPlus, FaCheckSquare, FaRegClock } from "react-icons/fa";
 
-const teamAvatars = [
-  "https://ui-avatars.com/api/?name=Alice&background=f87171&color=fff&size=32",
-  "https://ui-avatars.com/api/?name=Bob&background=60a5fa&color=fff&size=32",
-  "https://ui-avatars.com/api/?name=Carol&background=34d399&color=fff&size=32",
-  "https://ui-avatars.com/api/?name=Dan&background=a78bfa&color=fff&size=32",
-];
-
 /* ─── Skeleton pieces ─────────────────────────────────────── */
 
 const TaskCardSkeleton = () => (
@@ -101,20 +94,20 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Header />
 
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-hidden flex flex-col px-6 pt-5 pb-4 gap-4">
           {/* Welcome row */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between flex-shrink-0">
             <h1 className="text-2xl font-bold text-gray-800">
               Welcome back, {user?.name?.split(" ")[0]}
             </h1>
           </div>
 
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {/* Two-column layout — fills remaining height exactly */}
+          <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-5 gap-5">
 
             {/* ── Left: To-Do ── */}
-            <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-              <div className="flex items-center justify-between mb-3">
+            <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col overflow-hidden">
+              <div className="flex items-center justify-between mb-2 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <FaRegClock className="text-sm text-gray-400" />
                   <span className="text-sm font-semibold text-red-500">To-Do</span>
@@ -127,11 +120,12 @@ const Dashboard = () => {
                   Add task
                 </button>
               </div>
-              <p className="text-xs text-gray-400 mb-3 font-medium">
+              <p className="text-xs text-gray-400 mb-3 font-medium flex-shrink-0">
                 {today} &nbsp;•&nbsp; Today
               </p>
 
-              <div className="overflow-y-auto max-h-[calc(100vh-320px)] pr-1 space-y-3">
+              {/* scrollable list */}
+              <div className="flex-1 overflow-y-auto pr-1 space-y-3">
                 {loading ? (
                   <>
                     <TaskCardSkeleton />
@@ -151,10 +145,10 @@ const Dashboard = () => {
             </div>
 
             {/* ── Right: Stats + Completed ── */}
-            <div className="lg:col-span-2 flex flex-col gap-5">
+            <div className="lg:col-span-2 flex flex-col gap-4 overflow-hidden">
 
-              {/* Task Status */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+              {/* Task Status — fixed height */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex-shrink-0">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-4 h-4 rounded border-2 border-gray-400 flex items-center justify-center">
                     <div className="w-2 h-2 bg-gray-400 rounded-sm" />
@@ -177,14 +171,15 @@ const Dashboard = () => {
                 )}
               </div>
 
-              {/* Completed Tasks */}
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex-1">
-                <div className="flex items-center gap-2 mb-4">
+              {/* Completed Tasks — grows + scrolls internally */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col flex-1 overflow-hidden">
+                <div className="flex items-center gap-2 mb-4 flex-shrink-0">
                   <FaCheckSquare className="text-red-400 text-sm" />
                   <h2 className="text-sm font-semibold text-gray-700">Completed Task</h2>
                 </div>
 
-                <div className="overflow-y-auto max-h-[calc(100vh-480px)] pr-1 space-y-3">
+                {/* scrollable list */}
+                <div className="flex-1 overflow-y-auto pr-1 space-y-3">
                   {loading ? (
                     <>
                       <CompletedCardSkeleton />
