@@ -35,6 +35,15 @@ body {
   transition: stroke-dasharray 0.6s ease;
 }
 
+/* Panel slide-in from right */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+.animate-slideIn {
+  animation: slideIn 0.25s ease-out;
+}
+
 /* Custom scrollbar */
 .scrollbar-thin::-webkit-scrollbar {
   width: 4px;

@@ -4,10 +4,9 @@ import Header from "../components/Header";
 import TaskCard from "../components/TaskCard";
 import StatusCard from "../components/StatusCard";
 import CreateTaskModal from "./CreateTask";
-import InviteModal from "../components/InviteModal";
 import { getTodos, getStats } from "../services/todoApi";
 import { useAuth } from "../context/AuthContext";
-import { FaPlus, FaUserPlus, FaCheckSquare, FaRegClock } from "react-icons/fa";
+import { FaPlus, FaCheckSquare, FaRegClock } from "react-icons/fa";
 
 const teamAvatars = [
   "https://ui-avatars.com/api/?name=Alice&background=f87171&color=fff&size=32",
@@ -68,7 +67,6 @@ const Dashboard = () => {
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showInviteModal, setShowInviteModal] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -109,28 +107,6 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold text-gray-800">
               Welcome back, {user?.name?.split(" ")[0]}
             </h1>
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {teamAvatars.map((src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt=""
-                    className="w-8 h-8 rounded-full border-2 border-white object-cover"
-                  />
-                ))}
-                <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-300 flex items-center justify-center text-xs text-gray-600 font-semibold">
-                  +3
-                </div>
-              </div>
-              <button
-                onClick={() => setShowInviteModal(true)}
-                className="flex items-center gap-1.5 border border-red-400 text-red-500 text-sm px-3 py-1.5 rounded-full hover:bg-red-50 transition font-medium"
-              >
-                <FaUserPlus className="text-xs" />
-                Invite
-              </button>
-            </div>
           </div>
 
           {/* Two-column layout */}
@@ -236,7 +212,6 @@ const Dashboard = () => {
         onCreated={fetchData}
       />
 
-      {showInviteModal && <InviteModal onClose={() => setShowInviteModal(false)} />}
     </div>
   );
 };

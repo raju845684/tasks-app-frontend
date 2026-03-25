@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 import { getTodos } from "../services/todoApi";
-import { FaTasks, FaPlus } from "react-icons/fa";
+import { FaTasks, FaPlus, FaSearch } from "react-icons/fa";
 
 const TABS = ["All", "Not Started", "In Progress", "Completed"];
 
@@ -37,6 +37,9 @@ const MyTask = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
+  const [localSearch, setLocalSearch] = useState(searchQuery);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,10 +56,33 @@ const MyTask = () => {
     fetchTasks();
   }, []);
 
-  const filtered = activeTab === "All" ? tasks : tasks.filter((t) => t.status === activeTab);
+  const byTab = activeTab === "All" ? tasks : tasks.filter((t) => t.status === activeTab);
+  const filtered = searchQuery
+    ? byTab.filter((t) =>
+        t.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        t.description?.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : byTab;
 
   return (
     <PageLayout>
+      {/* Search result banner */}
+      {searchQuery && (
+        <div className="flex items-center justify-between mb-4 px-4 py-2.5 bg-red-50 border border-red-200 rounded-xl">
+          <div className="flex items-center gap-2 text-sm text-red-600">
+            <FaSearch className="text-xs" />
+            Results for <span className="font-semibold">"{searchQuery}"</span>
+            <span className="text-red-400">— {filtered.length} found</span>
+          </div>
+          <button
+            onClick={() => setSearchParams({})}
+            className="text-xs text-red-400 hover:text-red-600 font-medium"
+          >
+            Clear
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
