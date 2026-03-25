@@ -49,21 +49,142 @@ const Skeleton = () => (
     <Sidebar />
     <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
       <Header />
-      <main className="flex-1 overflow-y-auto p-6">
-        <div className="animate-pulse space-y-4 max-w-6xl mx-auto">
-          <div className="h-3 w-48 bg-gray-200 rounded" />
-          <div className="h-7 w-2/3 bg-gray-200 rounded" />
-          <div className="flex gap-5 mt-4">
-            <div className="flex-1 space-y-3">
-              <div className="bg-white rounded-lg h-40 border border-gray-200" />
-              <div className="bg-white rounded-lg h-28 border border-gray-200" />
+
+      {/* Top bar skeleton */}
+      <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
+        <div className="animate-pulse flex items-center gap-2">
+          <div className="h-3 w-20 bg-gray-200 rounded" />
+          <div className="h-3 w-3 bg-gray-100 rounded" />
+          <div className="h-3 w-16 bg-gray-200 rounded" />
+          <div className="h-3 w-3 bg-gray-100 rounded" />
+          <div className="h-3 w-24 bg-gray-300 rounded" />
+        </div>
+        <div className="animate-pulse flex items-center gap-2">
+          <div className="h-7 w-14 bg-gray-100 rounded-md" />
+          <div className="h-7 w-16 bg-gray-100 rounded-md" />
+          <div className="h-7 w-7 bg-gray-100 rounded-md" />
+        </div>
+      </div>
+
+      {/* Two-column body skeleton */}
+      <div className="flex flex-1 overflow-hidden">
+
+        {/* LEFT column */}
+        <div className="flex-1 overflow-y-auto p-7 space-y-5">
+          {/* Task ID + title */}
+          <div className="animate-pulse space-y-2">
+            <div className="h-3 w-24 bg-gray-200 rounded" />
+            <div className="h-7 w-3/4 bg-gray-300 rounded" />
+          </div>
+
+          {/* Status chips row */}
+          <div className="animate-pulse flex items-center gap-3">
+            <div className="h-7 w-20 bg-gray-200 rounded-full" />
+            <div className="h-px w-5 bg-gray-200" />
+            <div className="h-7 w-24 bg-blue-100 rounded-full" />
+            <div className="h-px w-5 bg-gray-200" />
+            <div className="h-7 w-16 bg-gray-200 rounded-full" />
+          </div>
+
+          {/* Description card */}
+          <div className="animate-pulse bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center gap-2">
+              <div className="h-3 w-3 bg-gray-200 rounded" />
+              <div className="h-3 w-20 bg-gray-200 rounded" />
             </div>
-            <div className="w-64 space-y-3">
-              <div className="bg-white rounded-lg h-64 border border-gray-200" />
+            <div className="px-5 py-4 space-y-2">
+              <div className="h-3 bg-gray-100 rounded w-full" />
+              <div className="h-3 bg-gray-100 rounded w-5/6" />
+              <div className="h-3 bg-gray-100 rounded w-4/6" />
+              <div className="h-3 bg-gray-100 rounded w-3/6" />
+            </div>
+          </div>
+
+          {/* Attachment card */}
+          <div className="animate-pulse bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center gap-2">
+              <div className="h-3 w-3 bg-gray-200 rounded" />
+              <div className="h-3 w-20 bg-gray-200 rounded" />
+            </div>
+            <div className="p-4">
+              <div className="h-44 bg-gray-100 rounded-lg w-full" />
+            </div>
+          </div>
+
+          {/* Activity card */}
+          <div className="animate-pulse bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center gap-2">
+              <div className="h-3 w-3 bg-gray-200 rounded" />
+              <div className="h-3 w-16 bg-gray-200 rounded" />
+            </div>
+            <div className="px-5 py-4 flex gap-3 border-t border-gray-50">
+              <div className="w-7 h-7 rounded-full bg-gray-200 flex-shrink-0" />
+              <div className="flex-1 h-9 bg-gray-100 rounded-lg" />
             </div>
           </div>
         </div>
-      </main>
+
+        {/* RIGHT sidebar */}
+        <div className="w-72 flex-shrink-0 border-l border-gray-200 bg-white p-5 space-y-5 overflow-y-auto">
+          {/* Status */}
+          <div className="animate-pulse space-y-2">
+            <div className="h-2.5 w-12 bg-gray-200 rounded" />
+            <div className="h-9 bg-gray-100 rounded-lg w-full" />
+          </div>
+          <div className="border-t border-gray-100" />
+
+          {/* Priority */}
+          <div className="animate-pulse space-y-2">
+            <div className="h-2.5 w-14 bg-gray-200 rounded" />
+            <div className="h-7 w-24 bg-gray-100 rounded-lg" />
+          </div>
+          <div className="border-t border-gray-100" />
+
+          {/* Assignee */}
+          <div className="animate-pulse space-y-2">
+            <div className="h-2.5 w-16 bg-gray-200 rounded" />
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full bg-gray-200" />
+              <div className="space-y-1">
+                <div className="h-3 w-20 bg-gray-200 rounded" />
+                <div className="h-2.5 w-12 bg-gray-100 rounded" />
+              </div>
+            </div>
+          </div>
+
+          {/* Reporter */}
+          <div className="animate-pulse space-y-2">
+            <div className="h-2.5 w-16 bg-gray-200 rounded" />
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full bg-gray-200" />
+              <div className="space-y-1">
+                <div className="h-3 w-20 bg-gray-200 rounded" />
+                <div className="h-2.5 w-12 bg-gray-100 rounded" />
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-100" />
+
+          {/* Dates */}
+          <div className="animate-pulse space-y-4">
+            <div className="space-y-1.5">
+              <div className="h-2.5 w-16 bg-gray-200 rounded" />
+              <div className="h-3.5 w-28 bg-gray-100 rounded" />
+            </div>
+            <div className="space-y-1.5">
+              <div className="h-2.5 w-14 bg-gray-200 rounded" />
+              <div className="h-3.5 w-32 bg-gray-100 rounded" />
+            </div>
+          </div>
+          <div className="border-t border-gray-100" />
+
+          {/* Label */}
+          <div className="animate-pulse space-y-2">
+            <div className="h-2.5 w-10 bg-gray-200 rounded" />
+            <div className="h-7 w-20 bg-purple-50 rounded-md" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
