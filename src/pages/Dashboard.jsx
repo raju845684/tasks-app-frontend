@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import TaskCard from "../components/TaskCard";
 import StatusCard from "../components/StatusCard";
 import CreateTaskModal from "./CreateTask";
+import InviteModal from "../components/InviteModal";
 import { getTodos, getStats } from "../services/todoApi";
 import { useAuth } from "../context/AuthContext";
 import { FaPlus, FaUserPlus, FaCheckSquare, FaRegClock } from "react-icons/fa";
@@ -67,6 +68,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showInviteModal, setShowInviteModal] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -121,7 +123,10 @@ const Dashboard = () => {
                   +3
                 </div>
               </div>
-              <button className="flex items-center gap-1.5 border border-red-400 text-red-500 text-sm px-3 py-1.5 rounded-full hover:bg-red-50 transition font-medium">
+              <button
+                onClick={() => setShowInviteModal(true)}
+                className="flex items-center gap-1.5 border border-red-400 text-red-500 text-sm px-3 py-1.5 rounded-full hover:bg-red-50 transition font-medium"
+              >
                 <FaUserPlus className="text-xs" />
                 Invite
               </button>
@@ -230,6 +235,8 @@ const Dashboard = () => {
         onClose={() => setShowCreateModal(false)}
         onCreated={fetchData}
       />
+
+      {showInviteModal && <InviteModal onClose={() => setShowInviteModal(false)} />}
     </div>
   );
 };
