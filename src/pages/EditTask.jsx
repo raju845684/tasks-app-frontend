@@ -106,17 +106,67 @@ const EditTask = () => {
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <Header />
-          <main className="flex-1 flex items-center justify-center">
-            <div className="animate-spin w-8 h-8 border-4 border-red-400 border-t-transparent rounded-full" />
+          <main className="flex-1 overflow-y-auto p-6">
+            {/* Back button skeleton */}
+            <div className="animate-pulse h-4 w-28 bg-gray-200 rounded mb-6" />
+
+            <div className="max-w-2xl mx-auto bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
+              {/* Form header skeleton */}
+              <div className="animate-pulse flex items-center justify-between mb-6">
+                <div className="space-y-2">
+                  <div className="h-6 bg-gray-200 rounded w-24" />
+                  <div className="h-1 bg-gray-100 rounded w-14" />
+                </div>
+                <div className="w-9 h-9 rounded-full bg-gray-100" />
+              </div>
+
+              <div className="animate-pulse space-y-5">
+                {/* Title field */}
+                <div>
+                  <div className="h-3.5 bg-gray-200 rounded w-12 mb-2" />
+                  <div className="h-10 bg-gray-100 rounded-xl" />
+                </div>
+                {/* Date field */}
+                <div>
+                  <div className="h-3.5 bg-gray-200 rounded w-10 mb-2" />
+                  <div className="h-10 bg-gray-100 rounded-xl" />
+                </div>
+                {/* Priority */}
+                <div>
+                  <div className="h-3.5 bg-gray-200 rounded w-16 mb-2" />
+                  <div className="flex gap-3">
+                    <div className="h-9 w-24 bg-gray-100 rounded-full" />
+                    <div className="h-9 w-24 bg-gray-100 rounded-full" />
+                    <div className="h-9 w-20 bg-gray-100 rounded-full" />
+                  </div>
+                </div>
+                {/* Status */}
+                <div>
+                  <div className="h-3.5 bg-gray-200 rounded w-14 mb-2" />
+                  <div className="h-10 bg-gray-100 rounded-xl" />
+                </div>
+                {/* Description + Image */}
+                <div className="grid grid-cols-5 gap-5">
+                  <div className="col-span-3 space-y-2">
+                    <div className="h-3.5 bg-gray-200 rounded w-28 mb-2" />
+                    <div className="h-36 bg-gray-100 rounded-xl" />
+                  </div>
+                  <div className="col-span-2 space-y-2">
+                    <div className="h-3.5 bg-gray-200 rounded w-24 mb-2" />
+                    <div className="h-36 bg-gray-100 rounded-xl" />
+                  </div>
+                </div>
+                {/* Submit button */}
+                <div className="h-10 bg-gray-200 rounded-xl w-32" />
+              </div>
+            </div>
           </main>
         </div>
       </div>
     );
   }
 
-  const currentPreview =
-    imagePreview ||
-    (existingImage ? `http://127.0.0.1:5000/${existingImage}` : null);
+  const currentPreview = imagePreview || existingImage || null;
 
   return (
     <div className="flex w-full h-screen bg-gray-50">

@@ -64,8 +64,42 @@ const TaskDetails = () => {
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <Header />
-          <main className="flex-1 flex items-center justify-center">
-            <div className="animate-spin w-8 h-8 border-4 border-red-400 border-t-transparent rounded-full" />
+          <main className="flex-1 overflow-y-auto p-6">
+            {/* Back button skeleton */}
+            <div className="animate-pulse h-4 w-32 bg-gray-200 rounded mb-6" />
+
+            <div className="max-w-3xl mx-auto space-y-5">
+              {/* Header card skeleton */}
+              <div className="animate-pulse bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                {/* Title + buttons row */}
+                <div className="flex items-start justify-between mb-5">
+                  <div className="h-7 bg-gray-200 rounded w-2/3" />
+                  <div className="flex gap-2">
+                    <div className="h-9 w-16 bg-gray-100 rounded-xl" />
+                    <div className="h-9 w-20 bg-gray-100 rounded-xl" />
+                  </div>
+                </div>
+                {/* Badges */}
+                <div className="flex gap-3 mb-5">
+                  <div className="h-6 w-20 bg-gray-100 rounded-full" />
+                  <div className="h-6 w-24 bg-gray-100 rounded-full" />
+                  <div className="h-6 w-28 bg-gray-100 rounded-full" />
+                </div>
+                {/* Description */}
+                <div className="space-y-2">
+                  <div className="h-3.5 bg-gray-200 rounded w-24 mb-3" />
+                  <div className="h-3 bg-gray-100 rounded w-full" />
+                  <div className="h-3 bg-gray-100 rounded w-5/6" />
+                  <div className="h-3 bg-gray-100 rounded w-4/6" />
+                </div>
+              </div>
+
+              {/* Image card skeleton */}
+              <div className="animate-pulse bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <div className="h-3.5 bg-gray-200 rounded w-24 mb-3" />
+                <div className="h-52 bg-gray-100 rounded-xl" />
+              </div>
+            </div>
           </main>
         </div>
       </div>

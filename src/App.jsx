@@ -3,6 +3,8 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import TaskDetails from "./pages/TaskDetails";
+import EditTask from "./pages/EditTask";
 
 // Redirects to /login if not authenticated
 const PrivateRoute = ({ children }) => {
@@ -49,6 +51,22 @@ const App = () => (
           <PublicRoute>
             <SignupPage />
           </PublicRoute>
+        }
+      />
+      <Route
+        path="/task/:id"
+        element={
+          <PrivateRoute>
+            <TaskDetails />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/edit/:id"
+        element={
+          <PrivateRoute>
+            <EditTask />
+          </PrivateRoute>
         }
       />
       <Route path="*" element={<Navigate to="/" replace />} />
