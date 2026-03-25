@@ -24,8 +24,18 @@ const Sidebar = () => {
     navigate("/login");
   };
 
-  const isActive = (path) =>
-    path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
+  const isActive = (path) => {
+    if (path === "/") return location.pathname === "/";
+    // Highlight "My Task" for task detail and edit pages
+    if (path === "/tasks") {
+      return (
+        location.pathname.startsWith("/tasks") ||
+        location.pathname.startsWith("/task/") ||
+        location.pathname.startsWith("/edit/")
+      );
+    }
+    return location.pathname.startsWith(path);
+  };
 
   const avatarSrc =
     user?.avatar ||
