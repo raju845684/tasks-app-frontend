@@ -105,7 +105,7 @@ const Dashboard = () => {
           {/* Welcome row */}
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold text-gray-800">
-              Welcome back, {user?.name?.split(" ")[0]} 👋
+              Welcome back, {user?.name?.split(" ")[0]}
             </h1>
             <div className="flex items-center gap-3">
               <div className="flex -space-x-2">

@@ -5,6 +5,11 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import TaskDetails from "./pages/TaskDetails";
 import EditTask from "./pages/EditTask";
+import VitalTask from "./pages/VitalTask";
+import MyTask from "./pages/MyTask";
+import TaskCategories from "./pages/TaskCategories";
+import Settings from "./pages/Settings";
+import Help from "./pages/Help";
 
 // Redirects to /login if not authenticated
 const PrivateRoute = ({ children }) => {
@@ -69,6 +74,11 @@ const App = () => (
           </PrivateRoute>
         }
       />
+      <Route path="/vital"      element={<PrivateRoute><VitalTask /></PrivateRoute>} />
+      <Route path="/tasks"      element={<PrivateRoute><MyTask /></PrivateRoute>} />
+      <Route path="/categories" element={<PrivateRoute><TaskCategories /></PrivateRoute>} />
+      <Route path="/settings"   element={<PrivateRoute><Settings /></PrivateRoute>} />
+      <Route path="/help"       element={<PrivateRoute><Help /></PrivateRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   </AuthProvider>

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import {
   FaThLarge, FaExclamationCircle, FaTasks,
@@ -6,25 +6,29 @@ import {
 } from "react-icons/fa";
 
 const navItems = [
-  { icon: <FaThLarge />, label: "Dashboard", active: true },
-  { icon: <FaExclamationCircle />, label: "Vital Task" },
-  { icon: <FaTasks />, label: "My Task" },
-  { icon: <FaListUl />, label: "Task Categories" },
-  { icon: <FaCog />, label: "Settings" },
-  { icon: <FaQuestionCircle />, label: "Help" },
+  { icon: <FaThLarge />, label: "Dashboard", path: "/" },
+  { icon: <FaExclamationCircle />, label: "Vital Task", path: "/vital" },
+  { icon: <FaTasks />, label: "My Task", path: "/tasks" },
+  { icon: <FaListUl />, label: "Task Categories", path: "/categories" },
+  { icon: <FaCog />, label: "Settings", path: "/settings" },
+  { icon: <FaQuestionCircle />, label: "Help", path: "/help" },
 ];
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
 
-  // Generate initials avatar if no photo
-  const avatarSrc = user?.avatar ||
+  const isActive = (path) =>
+    path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
+
+  const avatarSrc =
+    user?.avatar ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || "U")}&background=f87171&color=fff&size=64`;
 
   return (
@@ -38,18 +42,14 @@ const Sidebar = () => {
       </div>
 
       {/* User Profile */}
-      <div className="flex flex-col items-center py-6 px-4 border-b border-red-400">
+      <div className="flex flex-col items-center py-5 px-4 border-b border-red-400">
         <img
           src={avatarSrc}
           alt={user?.name}
           className="w-14 h-14 rounded-full border-2 border-white shadow object-cover mb-2"
         />
-        <p className="font-semibold text-sm text-center leading-tight">
-          {user?.name || "User"}
-        </p>
-        <p className="text-xs text-red-200 mt-0.5 text-center truncate w-full px-2">
-          {user?.email}
-        </p>
+        <p className="font-semibold text-sm text-center leading-tight">{user?.name || "User"}</p>
+        <p className="text-xs text-red-200 mt-0.5 text-center truncate w-full px-2">{user?.email}</p>
       </div>
 
       {/* Nav */}
@@ -57,8 +57,9 @@ const Sidebar = () => {
         {navItems.map((item) => (
           <button
             key={item.label}
+            onClick={() => navigate(item.path)}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              item.active
+              isActive(item.path)
                 ? "bg-white text-red-500 shadow"
                 : "text-white hover:bg-red-400"
             }`}
